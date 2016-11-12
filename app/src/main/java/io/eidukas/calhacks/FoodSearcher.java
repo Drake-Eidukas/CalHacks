@@ -23,25 +23,19 @@ public class FoodSearcher {
     private static Gson gson = new Gson();
     private static final String SPOONACULAR_SEARCH_URL = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes";
 
-    public static HashMap<String, Double> getFrequencyMap(String foodQuery) {
-        HashMap<String, Double> freqMap = new HashMap<>();
-        String jsonString = getJsonString(SPOONACULAR_SEARCH_URL + "/search?query=" + foodQuery + "&mashape-key=" + APIKey.getAPIKey());
+    public static HashMap<String, Integer> getFrequencyMap(String foodQuery) {
+        HashMap<String, Integer> freqMap = new HashMap<>();
+        String jsonString = getJsonString(SPOONACULAR_SEARCH_URL + "/search?query=" + foodQuery + "&mashape-key=" + APIKey.API_KEY);
         if (jsonString == null) return null;
         FoodList foodList = gson.fromJson(jsonString, FoodList.class);
         for (FoodList.FoodId food : foodList.getResults()) {
-            StringBuilder sb = new StringBuilder();
-            sb.append(SPOONACULAR_SEARCH_URL);
-            sb.append("/");
-            sb.append(food.getId());
-            sb.append("?mashape-key=");
-            sb.append(APIKey.getAPIKey());
-            String jsonString2 = getJsonString(sb.toString());
+            String jsonString2 = getJsonString(SPOONACULAR_SEARCH_URL + "/" + food.getId() + "/information?mashape-key=" + APIKey.API_KEY);
             Recipe recipe = gson.fromJson(jsonString2, Recipe.class);
             for (Ingredient ingredient : recipe.getExtendedIngredients()) {
                 if (freqMap.get(ingredient.getName()) == null) {
-                    freqMap.put(ingredient.getName(), 1.0 / foodList.getResults().length);
+                    freqMap.put(ingredient.getName(), 1);
                 } else {
-                    double incrValue = freqMap.get(ingredient.getName()) + 1.0 / foodList.getResults().length;
+                    int incrValue = freqMap.get(ingredient.getName()) + 1;
                     freqMap.put(ingredient.getName(), incrValue);
                 }
             }
@@ -76,4 +70,8 @@ public class FoodSearcher {
         }
         return jsonString;
     }
+
+//    public static void main(String[] args) {
+//        System.out.println(getFrequencyMap("garlic_bread"));
+//    }
 }
