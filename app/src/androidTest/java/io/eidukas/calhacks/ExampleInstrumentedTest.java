@@ -1,4 +1,4 @@
-package eidukas.io.calhacks;
+package io.eidukas.calhacks;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

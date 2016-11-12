@@ -1,4 +1,4 @@
-package eidukas.io.calhacks;
+package io.eidukas.calhacks;
 
 import org.junit.Test;
 

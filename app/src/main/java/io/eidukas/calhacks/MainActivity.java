@@ -1,4 +1,4 @@
-package eidukas.io.calhacks;
+package io.eidukas.calhacks;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
