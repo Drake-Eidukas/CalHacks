@@ -51,13 +51,9 @@ public class MyAdapter extends android.support.v7.widget.RecyclerView.Adapter<My
     @Override
     public int getItemCount() {
         if (mDataSet == null) {
-            Log.v("foo", "fi", null);
-            System.out.println("poo");
             return 0;
         }
-        System.out.println("pee");
         return mDataSet.length;
-
     }
 
 

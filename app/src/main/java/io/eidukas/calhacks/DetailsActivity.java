@@ -31,6 +31,7 @@ public class DetailsActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private MyAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
+    private String foodQuery;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,7 +46,7 @@ public class DetailsActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         FoodSearcher foodSearcher = new FoodSearcher();
-        String foodQuery = "garlic_bread";
+        foodQuery = getIntent().getStringExtra("args");
         foodSearcher.execute(SPOONACULAR_SEARCH_URL + "/search?query=" + foodQuery + "&mashape-key=" + APIKey.getAPIKey());
     }
 
@@ -57,7 +58,7 @@ public class DetailsActivity extends AppCompatActivity {
         @Override
         protected Map<String, Integer> doInBackground(String... strings) {
             System.out.println(strings);
-            return io.eidukas.calhacks.FoodSearcher.getFrequencyMap(strings[0]);
+            return io.eidukas.calhacks.FoodSearcher.getFrequencyMap(foodQuery);
         }
 
 //        @Override
@@ -134,7 +135,7 @@ public class DetailsActivity extends AppCompatActivity {
             String[] result = new String[map.size()];
             int i = 0;
             for (String key : map.keySet()) {
-                result[i] = "" + key + " " + map.get(key) + "poo";
+                result[i] = "" + key + " - " + map.get(key);
                 i++;
             }
             adapter = new MyAdapter(result);
