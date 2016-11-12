@@ -24,7 +24,7 @@ public class FoodSearcher {
     private static Gson gson = new Gson();
     private static final String SPOONACULAR_SEARCH_URL = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes";
 
-    private static TreeMap<String, Integer> getFrequencyMap(String foodQuery) {
+    public static TreeMap<String, Integer> getFrequencyMap(String foodQuery) {
         TreeMap<String, Integer> freqMap = new TreeMap<>();
         String jsonString = getJsonString(SPOONACULAR_SEARCH_URL + "/search?query=" + foodQuery + "&mashape-key=" + APIKey.API_KEY);
         if (jsonString == null) return null;

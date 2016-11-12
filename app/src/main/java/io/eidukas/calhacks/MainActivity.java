@@ -14,11 +14,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
 public class MainActivity extends AppCompatActivity {
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -37,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), DetailsActivity.class);
-                intent.putExtra("args", "placeholder");
+                intent.putExtra("args", "garlic_bread");
                 startActivity(intent);
             }
         });
@@ -56,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         selectFromGallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(i, RESULT_LOAD_IMAGE);
             }
         });
@@ -94,8 +89,8 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
             Uri selectedImage = data.getData();
-            String[] filePathColumn = { MediaStore.Images.Media.DATA };
-            Cursor cursor = getContentResolver().query(selectedImage,filePathColumn, null, null, null);
+            String[] filePathColumn = {MediaStore.Images.Media.DATA};
+            Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
             cursor.moveToFirst();
             int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
             String picturePath = cursor.getString(columnIndex);
@@ -104,19 +99,6 @@ public class MainActivity extends AppCompatActivity {
             imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
         }
     }
-
-    private String bitmapToFile(Bitmap view) throws IOException{
-        File f = new File(getCacheDir(), getResources().getString(R.string.temp_file_name));
-        f.createNewFile();
-
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        view.compress(Bitmap.CompressFormat.PNG, 0 /*ignored for PNG*/, bos);
-        byte[] bitmapdata = bos.toByteArray();
-
-        FileOutputStream fos = new FileOutputStream(f);
-        fos.write(bitmapdata);
-        fos.flush();
-        fos.close();
-        return f.getAbsolutePath();
-    }
 }
+
+

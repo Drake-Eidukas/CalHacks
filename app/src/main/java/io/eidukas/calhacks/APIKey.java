@@ -1,7 +1,10 @@
 package io.eidukas.calhacks;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -9,19 +12,10 @@ import java.util.Scanner;
  */
 
 public class APIKey {
-    public static final File API_FILE = new File("\\app\\libs\\APIKey");
+
+    public static final String API_KEY = "2U6f31KTmHmshYCJmGGe4IyzgTOHp1FVI1njsnxcHCnJkHmxog";
 
     public static String getAPIKey() {
-        Scanner scanner = null;
-        try {
-            scanner = new Scanner(API_FILE);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        StringBuilder fileString = new StringBuilder();
-        while (scanner.hasNext()) {
-            fileString.append(scanner.nextLine() + "\n");
-        }
-        return fileString.toString();
+        return API_KEY;
     }
 }
