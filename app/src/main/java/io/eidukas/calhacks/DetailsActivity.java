@@ -19,6 +19,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -43,9 +44,10 @@ public class DetailsActivity extends AppCompatActivity {
         adapter = new MyAdapter();
         recyclerView.setAdapter(adapter);
 
-        FoodSearcher foodSearcher = new FoodSearcher();
+        /*FoodSearcher foodSearcher = new FoodSearcher();
         String foodQuery = "garlic_bread";
         foodSearcher.execute(SPOONACULAR_SEARCH_URL + "/search?query=" + foodQuery + "&mashape-key=" + APIKey.getAPIKey());
+   */
     }
 
     private static final String SPOONACULAR_SEARCH_URL = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes";
@@ -124,7 +126,13 @@ public class DetailsActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(HashMap<String, Double> stringDoubleHashMap) {
-
+            String[] result = new String[stringDoubleHashMap.size()];
+            int i = 0;
+            for (Map.Entry<String, Double> entry : stringDoubleHashMap.entrySet()) {
+                result[i] = "" + entry.getKey() + " " + entry.getValue();
+                i++;
+            }
+            adapter = new MyAdapter(result);
             super.onPostExecute(stringDoubleHashMap);
         }
     }
