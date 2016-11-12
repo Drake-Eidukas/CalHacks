@@ -25,6 +25,12 @@ public class MyAdapter extends android.support.v7.widget.RecyclerView.Adapter<My
     }
 
     public MyAdapter() {
+        String[] temp = {"Hello", "Mello", "bello"};
+        mDataSet = temp;
+    }
+
+    public MyAdapter(String[] myDataSet) {
+        myDataSet = myDataSet;
     }
 
     @Override
@@ -43,6 +49,9 @@ public class MyAdapter extends android.support.v7.widget.RecyclerView.Adapter<My
 
     @Override
     public int getItemCount() {
+        if (mDataSet == null) {
+            return 0;
+        }
         return mDataSet.length;
     }
 
