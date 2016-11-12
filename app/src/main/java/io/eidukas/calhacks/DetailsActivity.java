@@ -56,6 +56,7 @@ public class DetailsActivity extends AppCompatActivity {
 
         @Override
         protected Map<String, Integer> doInBackground(String... strings) {
+            System.out.println(strings);
             return io.eidukas.calhacks.FoodSearcher.getFrequencyMap(strings[0]);
         }
 
@@ -132,8 +133,8 @@ public class DetailsActivity extends AppCompatActivity {
         protected void onPostExecute(Map<String, Integer> map) {
             String[] result = new String[map.size()];
             int i = 0;
-            for (Map.Entry<String, Integer> entry : map.entrySet()) {
-                result[i] = "" + entry.getKey() + " " + entry.getValue();
+            for (String key : map.keySet()) {
+                result[i] = "" + key + " " + map.get(key) + "poo";
                 i++;
             }
             adapter = new MyAdapter(result);

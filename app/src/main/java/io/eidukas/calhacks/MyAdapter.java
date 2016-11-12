@@ -2,6 +2,7 @@ package io.eidukas.calhacks;
 
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +31,7 @@ public class MyAdapter extends android.support.v7.widget.RecyclerView.Adapter<My
     }
 
     public MyAdapter(String[] myDataSet) {
-        myDataSet = myDataSet;
+        mDataSet = myDataSet;
     }
 
     @Override
@@ -50,9 +51,13 @@ public class MyAdapter extends android.support.v7.widget.RecyclerView.Adapter<My
     @Override
     public int getItemCount() {
         if (mDataSet == null) {
+            Log.v("foo", "fi", null);
+            System.out.println("poo");
             return 0;
         }
+        System.out.println("pee");
         return mDataSet.length;
+
     }
 
 
