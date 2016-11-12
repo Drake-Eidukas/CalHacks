@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">CalHacks</string>
+    <string name="temp_file_name">TEMP_PIC_FILE</string>
 </resources>

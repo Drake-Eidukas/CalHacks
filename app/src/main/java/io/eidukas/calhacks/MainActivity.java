@@ -14,6 +14,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 public class MainActivity extends AppCompatActivity {
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -100,4 +105,18 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private String bitmapToFile(Bitmap view) throws IOException{
+        File f = new File(getCacheDir(), getResources().getString(R.string.temp_file_name));
+        f.createNewFile();
+
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        view.compress(Bitmap.CompressFormat.PNG, 0 /*ignored for PNG*/, bos);
+        byte[] bitmapdata = bos.toByteArray();
+
+        FileOutputStream fos = new FileOutputStream(f);
+        fos.write(bitmapdata);
+        fos.flush();
+        fos.close();
+        return f.getAbsolutePath();
+    }
 }
