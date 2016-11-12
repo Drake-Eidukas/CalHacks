@@ -14,6 +14,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.HashMap;
+import java.util.TreeMap;
 
 /**
  * Created by solmoms on 11/12/2016.
@@ -23,8 +24,8 @@ public class FoodSearcher {
     private static Gson gson = new Gson();
     private static final String SPOONACULAR_SEARCH_URL = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes";
 
-    public static HashMap<String, Integer> getFrequencyMap(String foodQuery) {
-        HashMap<String, Integer> freqMap = new HashMap<>();
+    private static TreeMap<String, Integer> getFrequencyMap(String foodQuery) {
+        TreeMap<String, Integer> freqMap = new TreeMap<>();
         String jsonString = getJsonString(SPOONACULAR_SEARCH_URL + "/search?query=" + foodQuery + "&mashape-key=" + APIKey.API_KEY);
         if (jsonString == null) return null;
         FoodList foodList = gson.fromJson(jsonString, FoodList.class);
@@ -71,7 +72,9 @@ public class FoodSearcher {
         return jsonString;
     }
 
-//    public static void main(String[] args) {
-//        System.out.println(getFrequencyMap("garlic_bread"));
-//    }
+
+
+    public static void main(String[] args) {
+        System.out.println(getFrequencyMap("garlic_bread"));
+    }
 }
