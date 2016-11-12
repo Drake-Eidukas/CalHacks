@@ -11,28 +11,38 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="eidukas.io.calhacks.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        android:id="@+id/textView" />
-
-    <Button
-        android:text="Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="71dp"
-        android:id="@+id/open_camera" />
-
     <ImageView
         android:layout_width="300sp"
         android:layout_height="300sp"
         app:srcCompat="@mipmap/ic_launcher"
-        android:layout_centerVertical="true"
+        android:id="@+id/imageView"
+        android:layout_above="@+id/select_from_gallery"
         android:layout_centerHorizontal="true"
-        android:id="@+id/imageView" />
+        android:layout_marginBottom="46dp" />
+
+    <Button
+        android:text="Gallery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/select_from_gallery"
+        android:layout_alignParentBottom="true"
+        android:layout_alignEnd="@+id/imageView" />
+
+    <Button
+        android:text="Camera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/open_camera"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Clear"
+        android:id="@+id/clear_image"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/imageView" />
 
 
 </RelativeLayout>
