@@ -1,4 +1,4 @@
-package io.eidukas.calhacks;
+package io.eidukas.calhacks.DataModels;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -12,6 +12,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+
+import io.eidukas.calhacks.R;
 
 
 public class Classifier {

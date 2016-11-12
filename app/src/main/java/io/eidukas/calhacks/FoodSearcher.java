@@ -1,20 +1,19 @@
 package io.eidukas.calhacks;
 
 import android.support.annotation.Nullable;
-import android.util.Log;
 
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.nio.charset.Charset;
-import java.util.HashMap;
 import java.util.TreeMap;
+
+import io.eidukas.calhacks.DataModels.Ingredient;
+import io.eidukas.calhacks.DataModels.Recipe;
 
 /**
  * Created by solmoms on 11/12/2016.
