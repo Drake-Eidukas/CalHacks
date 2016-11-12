@@ -12,7 +12,6 @@ import java.util.Scanner;
  */
 
 public class APIKey {
-    public static final String API_KEY = "2U6f31KTmHmshYCJmGGe4IyzgTOHp1FVI1njsnxcHCnJkHmxog";
 
     public static final String API_KEY = "2U6f31KTmHmshYCJmGGe4IyzgTOHp1FVI1njsnxcHCnJkHmxog";
 
