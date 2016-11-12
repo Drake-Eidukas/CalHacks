@@ -27,8 +27,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         requestPermission();
 
-        Button openCamera = (Button) findViewById(R.id.open_camera);
         mImageView = (ImageView) findViewById(R.id.imageView);
+        mImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), DetailsActivity.class);
+                intent.putExtra("args", "placeholder");
+                startActivity(intent);
+            }
+        });
+
+        Button openCamera = (Button) findViewById(R.id.open_camera);
         openCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
