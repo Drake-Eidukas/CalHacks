@@ -10,6 +10,7 @@ import android.os.Build;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.AppCompatImageView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -28,33 +29,51 @@ public class MainActivity extends AppCompatActivity {
         requestPermission();
 
         mImageView = (ImageView) findViewById(R.id.imageView);
-        mImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), DetailsActivity.class);
-                intent.putExtra("args", "garlic_bread");
-                startActivity(intent);
-            }
-        });
+//        mImageView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(view.getContext(), DetailsActivity.class);
+//                intent.putExtra("args", "garlic_bread");
+//                startActivity(intent);
+//            }
+//        });
 
         Button openCamera = (Button) findViewById(R.id.open_camera);
         openCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-                }
+            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                mImageView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(view.getContext(), DetailsActivity.class);
+                        intent.putExtra("args", "garlic_bread");
+                        startActivity(intent);
+                    }
+                });
+            }
             }
         });
+
         Button selectFromGallery = (Button) findViewById(R.id.select_from_gallery);
         selectFromGallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(i, RESULT_LOAD_IMAGE);
+                mImageView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(view.getContext(), DetailsActivity.class);
+                        intent.putExtra("args", "garlic_bread");
+                        startActivity(intent);
+                    }
+                });
             }
         });
+
         Button clear = (Button) findViewById(R.id.clear_image);
         clear.setOnClickListener(new View.OnClickListener() {
             @Override
