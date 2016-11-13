@@ -51,7 +51,7 @@ public class DetailsActivity extends AppCompatActivity {
 
         @Override
         protected Recipe[] doInBackground(String... strings) {
-            return FoodSearcher.getDifferentRecipes(strings[0], APIKey.getRecipeKey(getApplicationContext()));
+            return FoodSearcher.getDifferentRecipes(strings[0]);
         }
 
         @Override
