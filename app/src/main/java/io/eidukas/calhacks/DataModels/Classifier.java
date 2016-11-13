@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.Log;
 
+import com.google.gson.Gson;
 import com.ibm.watson.developer_cloud.visual_recognition.v3.VisualRecognition;
 import com.ibm.watson.developer_cloud.visual_recognition.v3.model.ClassifyImagesOptions;
 import com.ibm.watson.developer_cloud.visual_recognition.v3.model.VisualClassification;
@@ -53,7 +54,7 @@ public class Classifier {
         this.context = context;
     }
 
-    public VisualClassification getClassification(String filename){
+    private VisualClassification getClassification(String filename){
         VisualRecognition service = new VisualRecognition(VisualRecognition.VERSION_DATE_2016_05_20);
         service.setApiKey(apiKey);
 
@@ -64,11 +65,11 @@ public class Classifier {
         return service.classify(options).execute();
     }
 
-    public String jsonFromClassifier(VisualClassification classification){
+    private String jsonFromClassifier(VisualClassification classification){
         return classification.toString();
     }
 
-    public String jsonFromBitmap(Bitmap bitmap){
+    private String jsonFromBitmap(Bitmap bitmap){
         try {
             //create a file to write bitmap data
             File f = new File(context.getCacheDir(), context.getResources().getString(R.string.temp_file_name));
@@ -93,5 +94,11 @@ public class Classifier {
         }
         return "NA";
 
+    }
+
+    public String nameFromBitmap(Bitmap bitmap){
+        Gson gson = new Gson();
+        ClassifierResult result = gson.fromJson(jsonFromBitmap(bitmap), ClassifierResult.class);
+        return result.getName();
     }
 }
