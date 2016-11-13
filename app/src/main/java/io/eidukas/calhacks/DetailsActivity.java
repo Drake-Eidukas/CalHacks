@@ -132,10 +132,11 @@ public class DetailsActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Map<String, Integer> map) {
-            String[] result = new String[map.size()];
+            String[][] result = new String[map.size()][2];
             int i = 0;
             for (String key : map.keySet()) {
-                result[i] = "" + key + " - " + map.get(key);
+                result[i][0] = key;
+                result[i][1] = Integer.toString(map.get(key));
                 i++;
             }
             adapter = new MyAdapter(result);
