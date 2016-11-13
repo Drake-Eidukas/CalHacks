@@ -39,8 +39,6 @@ public class MyAdapter extends android.support.v7.widget.RecyclerView.Adapter<My
     }
 
     public MyAdapter() {
-        String[] temp = {"Please wait for network calls...", null};
-        mDataSet = temp;
     }
 
     public MyAdapter(Recipe[] myDataSet) {
@@ -59,8 +57,8 @@ public class MyAdapter extends android.support.v7.widget.RecyclerView.Adapter<My
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.ingredient.setText(mDataSet[position][0]);
-        holder.frequency.setText(mDataSet[position][1]);
+        holder.ingredient.setText(mDataSet[position].getTitle());
+        holder.frequency.setText("Number of aggregate likes : " + mDataSet[position].getAggregateLikes());
     }
 
     @Override
