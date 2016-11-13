@@ -16,13 +16,15 @@ import org.w3c.dom.Text;
 import java.text.AttributedCharacterIterator;
 import java.util.ArrayList;
 
+import io.eidukas.calhacks.DataModels.Recipe;
+
 /**
  * Created by daniel on 11/12/16.
  */
 
 public class MyAdapter extends android.support.v7.widget.RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
-    String[][] mDataSet;
+    Recipe[] mDataSet;
 
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -37,11 +39,11 @@ public class MyAdapter extends android.support.v7.widget.RecyclerView.Adapter<My
     }
 
     public MyAdapter() {
-        String[][] temp = {{"Please wait for network calls...", null}};
+        String[] temp = {"Please wait for network calls...", null};
         mDataSet = temp;
     }
 
-    public MyAdapter(String[][] myDataSet) {
+    public MyAdapter(Recipe[] myDataSet) {
         mDataSet = myDataSet;
 
     }
@@ -68,9 +70,4 @@ public class MyAdapter extends android.support.v7.widget.RecyclerView.Adapter<My
         }
         return mDataSet.length;
     }
-
-
-
-
-
 }
