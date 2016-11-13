@@ -5,32 +5,12 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.google.gson.Gson;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-
 import io.eidukas.calhacks.DataModels.Recipe;
 
-/**
- * Created by daniel on 11/12/16.
- */
 
 public class DetailsActivity extends AppCompatActivity {
 
@@ -71,7 +51,7 @@ public class DetailsActivity extends AppCompatActivity {
 
         @Override
         protected Recipe[] doInBackground(String... strings) {
-            return FoodSearcher.getDifferentRecipes(strings[0]);
+            return FoodSearcher.getDifferentRecipes(strings[0], APIKey.getRecipeKey(getApplicationContext()));
         }
 
         @Override

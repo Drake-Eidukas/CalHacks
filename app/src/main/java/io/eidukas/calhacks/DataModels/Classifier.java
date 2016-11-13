@@ -58,6 +58,7 @@ public class Classifier {
         VisualRecognition service = new VisualRecognition(VisualRecognition.VERSION_DATE_2016_05_20);
         service.setApiKey(apiKey);
 
+        Log.d(TAG, "getClassification: " + filename);
         ClassifyImagesOptions options = new ClassifyImagesOptions.Builder()
                 .images(new File(filename))
                 .classifierIds(getClassifierId())
@@ -100,7 +101,17 @@ public class Classifier {
 
     public String nameFromBitmap(Bitmap bitmap){
         Gson gson = new Gson();
-        ClassifierResult result = gson.fromJson(jsonFromBitmap(bitmap), ClassifierResult.class);
-        return result.getName();
+        String json = jsonFromBitmap(bitmap);
+        ClassifierResult result = gson.fromJson(json, ClassifierResult.class);
+        ClassifierResult.Class[] classes = result.getImages()[0].getClassifiers()[0].getClasses();
+        double min = 0;
+        String minS = classes[0].getClassname();
+        for (ClassifierResult.Class res : classes){
+            if (res.getScore() > min){
+                minS = res.getClassname();
+                min = res.getScore();
+            }
+        }
+        return minS;
     }
 }

@@ -1,17 +1,21 @@
 package io.eidukas.calhacks.DataModels;
 
+import android.util.Log;
+
 import com.google.gson.annotations.SerializedName;
 
 
 public class ClassifierResult {
 
-    private Images images;
-    public Images getImages(){
+    private Classifiers[] images;
+    public Classifiers[] getImages(){
         return images;
     }
 
     public String getName(){
-        return images.getImages()[0].getClasses()[0].getClassname();
+        Log.d("TAG", "getName: "+images[0].getClassifiers()[0].getClasses()[0].toString());
+        return images[0].getClassifiers()[0].getClasses()[0].toString();
+
     }
 
     public class Class {
@@ -31,15 +35,12 @@ public class ClassifierResult {
             return classes;
         }
     }
-    public class Images{
-        private ClassGroup[] images;
-        @SerializedName("custom_classes")
-        private int customClasses;
-        public ClassGroup[] getImages(){
-            return images;
-        }
-        public int getCustomClasses(){
-            return customClasses;
+
+    public class Classifiers{
+        @SerializedName("classifiers")
+        private ClassGroup[] classifiers;
+        public ClassGroup[] getClassifiers(){
+            return classifiers;
         }
     }
 }

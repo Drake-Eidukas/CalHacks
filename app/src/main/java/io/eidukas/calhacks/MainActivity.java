@@ -94,9 +94,6 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             mBitmap = (Bitmap) extras.get("data");
-            mImageView.setImageBitmap(mBitmap);
-            mImageView.setVisibility(View.VISIBLE);
-            uploadButton.setVisibility(View.VISIBLE);
         }
         if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
             Uri selectedImage = data.getData();
@@ -107,14 +104,15 @@ public class MainActivity extends AppCompatActivity {
             String picturePath = cursor.getString(columnIndex);
             cursor.close();
             mBitmap = BitmapFactory.decodeFile(picturePath);
-            mImageView.setImageBitmap(mBitmap);
-            mImageView.setVisibility(View.VISIBLE);
-            uploadButton.setVisibility(View.VISIBLE);
         }
         if(mBitmap.getWidth() > 500 || mBitmap.getHeight() > 500){
             double scale = 500.0/Math.max(mBitmap.getHeight(), mBitmap.getWidth());
             mBitmap = Bitmap.createScaledBitmap(mBitmap, (int)(mBitmap.getWidth() * scale), (int)(mBitmap.getHeight() * scale), false);
         }
+
+        mImageView.setImageBitmap(mBitmap);
+        mImageView.setVisibility(View.VISIBLE);
+        uploadButton.setVisibility(View.VISIBLE);
     }
 }
 
