@@ -13,8 +13,11 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.TreeMap;
+import java.util.Map;
+import java.util.Collections;
 
 /**
  * Created by solmoms on 11/12/2016.
@@ -71,10 +74,31 @@ public class FoodSearcher {
         }
         return jsonString;
     }
-
+    public static ArrayList<popularIngredient> getPopularIngredients(TreeMap<String, Integer> freqMap){
+        ArrayList<popularIngredient> p = new ArrayList<>(0);
+            for (Map.Entry<String,Integer> ingredient : freqMap.entrySet()){
+                p.add(new popularIngredient(ingredient.getKey(), ingredient.getValue()));
+            }
+        Collections.sort(p,Collections.<popularIngredient>reverseOrder());
+        return p;
+    }
+    public static class popularIngredient implements Comparable<popularIngredient>{
+        String ingredient;
+        int freq;
+        public popularIngredient(String ingredient, int freq){
+            this.ingredient = ingredient;
+            this.freq = freq;
+        }
+        public int compareTo(popularIngredient p2) {
+            Integer f2 = new Integer(p2.freq);
+            Integer f1 = new Integer(this.freq);
+            return f1.compareTo(f2);
+        }
+        public String toString(){ return ingredient + ": " + freq;}
+    }
 
 
     public static void main(String[] args) {
-        System.out.println(getFrequencyMap("garlic_bread"));
+        System.out.println(getPopularIngredients(getFrequencyMap("garlic_bread")));
     }
 }
