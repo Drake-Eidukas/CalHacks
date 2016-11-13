@@ -33,7 +33,7 @@ public class Classifier {
         this.classifierId = classifierId;
     }
 
-    public Classifier(String apikey, String classifierId, Context context){
+    public Classifier(String apiKey, String classifierId, Context context){
         setApiKey(apiKey);
         setClassifierId(classifierId);
         setContext(context);
@@ -62,6 +62,7 @@ public class Classifier {
                 .images(new File(filename))
                 .classifierIds(getClassifierId())
                 .build();
+        service.classify(options);
         return service.classify(options).execute();
     }
 
@@ -87,6 +88,7 @@ public class Classifier {
             fos.flush();
             fos.close();
 
+            System.out.println(f.getAbsolutePath());
             return jsonFromClassifier(getClassification(f.getAbsolutePath()));
 
         } catch (IOException ioE){

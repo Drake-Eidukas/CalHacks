@@ -1,4 +1,11 @@
 <resources>
-    <string name="app_name">CalHacks</string>
+    <string name="app_name">foodR</string>
     <string name="temp_file_name">TEMP_PIC_FILE</string>
+    <string name="upload">Upload Image</string>
+    <string name="camera">Take a pic!</string>
+    <string name="gallery">Select a pic!</string>
+
+    <string name="api_key_recipe_filename">recipe.txt</string>
+    <string name="api_key_ibm_filename">ibm.txt</string>
+    <string name="api_model_filename">model.txt</string>
 </resources>

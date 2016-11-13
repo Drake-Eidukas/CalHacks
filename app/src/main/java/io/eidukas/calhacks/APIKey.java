@@ -1,21 +1,37 @@
 package io.eidukas.calhacks;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Scanner;
+import android.content.Context;
+import android.content.res.Resources;
+import android.support.annotation.Nullable;
 
-/**
- * Created by solmoms on 11/12/2016.
- */
+import java.io.InputStream;
 
 public class APIKey {
 
-    public static final String API_KEY = "2U6f31KTmHmshYCJmGGe4IyzgTOHp1FVI1njsnxcHCnJkHmxog";
-
-    public static String getAPIKey() {
-        return API_KEY;
+    public static String getIBMKey(Context context){
+        return readFromResource(context, R.raw.ibm);
     }
+
+    public static String getRecipeKey(Context context){
+        return readFromResource(context, R.raw.recipe);
+    }
+
+    public static String getModelKey(Context context){
+        return readFromResource(context, R.raw.model);
+    }
+
+    @Nullable
+    private static String readFromResource(Context context, int resource){
+        try {
+            Resources res = context.getResources();
+            InputStream in_s = res.openRawResource(resource);
+            byte[] b = new byte[in_s.available()];
+            in_s.read(b);
+            return new String(b);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }
