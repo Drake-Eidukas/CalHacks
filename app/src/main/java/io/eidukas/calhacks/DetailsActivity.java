@@ -36,7 +36,6 @@ public class DetailsActivity extends AppCompatActivity {
 
     private ListView listView;
     private MyAdapter adapter;
-    private ListView.LayoutManager layoutManager;
     private String foodQuery;
 
     @Override
@@ -44,20 +43,21 @@ public class DetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
-        listView = (ListView) findViewById(R.id.recycler_view);
+        listView = (ListView) findViewById(R.id.list_view);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Recipe recipe = adapter.getItem(position);
 
                 Intent intent = new Intent(parent.getContext(), RecipeActivity.class)
-                        .putExtra(Intent.EXTRA_TEXT, recipe);
+                                 .putExtra(Intent.EXTRA_TEXT, recipe);
 
                 // Attempt to start an activity that can handle the Intent
                 startActivity(intent);
-            }
+                }
+            });
 
-        adapter = new MyAdapter();
+        adapter = new MyAdapter(this, R.layout.list_item);
         listView.setAdapter(adapter);
 
         SearchFoodTask task = new SearchFoodTask();
@@ -76,7 +76,8 @@ public class DetailsActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Recipe[] recipes) {
-            adapter = new MyAdapter(recipes);
+            adapter.clear();
+            adapter.addAll(recipes);
             listView.setAdapter(adapter);
             super.onPostExecute(recipes);
         }
