@@ -1,6 +1,7 @@
 package io.eidukas.calhacks;
 
 
+import android.content.Context;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
@@ -8,6 +9,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -22,50 +25,31 @@ import io.eidukas.calhacks.DataModels.Recipe;
  * Created by daniel on 11/12/16.
  */
 
-public class MyAdapter extends android.support.v7.widget.RecyclerView.Adapter<MyAdapter.ViewHolder> {
+public class MyAdapter extends ArrayAdapter<Recipe> {
 
-    Recipe[] mDataSet;
+    public MyAdapter(Context context, int resource) {
+        super(context, resource);
+    }
 
-
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView ingredient;
-        public TextView frequency;
-
-        public ViewHolder(View v) {
-            super(v);
-            ingredient = (TextView) v.findViewById(R.id.ingredient);
-            frequency = (TextView) v.findViewById(R.id.frequency);
+    @Override
+    public View getView(int position, View v, ViewGroup parent) {
+        if (v == null) {
+            LayoutInflater inflater = LayoutInflater.from(getContext());
+            v = inflater.inflate(R.layout.list_item, null);
         }
-    }
 
-    public MyAdapter() {
-    }
+        Recipe recipe = getItem(position);
 
-    public MyAdapter(Recipe[] myDataSet) {
-        mDataSet = myDataSet;
+        TextView title = (TextView) v.findViewById(R.id.textView_title);
+        TextView likes = (TextView) v.findViewById(R.id.aggregateLikes);
 
-    }
-
-    @Override
-    public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
-        ViewHolder vh = new ViewHolder(v);
-        return vh;
-
-    }
-
-    @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.ingredient.setText(mDataSet[position].getTitle());
-        holder.frequency.setText("Number of aggregate likes : " + mDataSet[position].getAggregateLikes());
-    }
-
-    @Override
-    public int getItemCount() {
-        if (mDataSet == null) {
-            return 0;
+        if (title != null) {
+            title.setText(recipe.getTitle());
         }
-        return mDataSet.length;
+        if (likes != null) {
+            likes.setText(recipe.getAggregateLikes());
+        }
+
+        return v;
     }
 }
